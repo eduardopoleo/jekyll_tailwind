@@ -1,3 +1,14 @@
 .current {
   color: green;
 }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.test-rectangle {
+  width: 100px;
+  height: 100px;
+  background: red;
+}
