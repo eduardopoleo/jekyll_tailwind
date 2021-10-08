@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <!-- page is an special var that contains the current page properties -->
+    <title>Staff</title>
+    <!-- even though styles is scss it'll get process as css in the final _site dump -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/styles.css">
+  </head>
+  <body>
+    <!-- content is an special var in jekyll that similart to yield in ruby partials -->
+    <nav>
+  
+    <a href="/" >
+      Home
+    </a>
+  
+    <a href="/about.html" >
+      About
+    </a>
+  
+    <a href="/blog.html" >
+      Blog
+    </a>
+  
+    <a href="/staff.html" } class="current" >
+      Staff
+    </a>
+  
+</nav>
+
+
+    <h1><h1>Staff</h1>
+
+<ul>
+  
+    <li>
+      <h2><a href="/authors/jill.html">Jill Smith</a></h2>
+      <h3>Chief Editor</h3>
+      <p><p>Jill is an avid fruit grower based in the south east of France</p>
+</p>
+      <!-- 
+        because it's a collection it assumes that each entry
+        will have it's own file in the file system
+        so author.content is whatever is on that file
+       -->
+    </li>
+  
+    <li>
+      <h2><a href="/authors/ted.html">Ted Doe</a></h2>
+      <h3>Writer</h3>
+      <p><p>Ted has been eating fruit since he was baby.</p>
+</p>
+      <!-- 
+        because it's a collection it assumes that each entry
+        will have it's own file in the file system
+        so author.content is whatever is on that file
+       -->
+    </li>
+  
+</ul></h1> 
+  </body>
+</html>
