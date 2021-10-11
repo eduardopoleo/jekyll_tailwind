@@ -7,51 +7,181 @@
     <!-- even though styles is scss it'll get process as css in the final _site dump -->
     <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
   </head>
-  <body>
+  <body class="bg-gray-100">
     <!-- content is an special var in jekyll that similart to yield in ruby partials -->
-    <nav>
-  
-    <a href="/" >
-      Home
-    </a>
-  
-    <a href="/about.html" >
-      About
-    </a>
-  
-    <a href="/blog.html" >
-      Blog
-    </a>
-  
-    <a href="/staff.html" >
-      Staff
-    </a>
-  
+    <nav id="header" class="fixed w-full z-10 top-0">
+
+    <div id="progress" class="h-1 z-20 top-0" style="background:linear-gradient(to right, #4dc0b5 var(--scroll), transparent 0);"></div>
+
+    <div class="w-full md:max-w-4xl mx-auto flex flex-wrap items-center justify-between mt-0 py-3">
+
+        <div class="pl-4">
+            <a class="text-gray-900 text-base no-underline hover:no-underline font-extrabold text-xl" href="#">
+                Minimal Blog
+            </a>
+        </div>
+
+        <div class="block lg:hidden pr-4">
+            <button id="nav-toggle" class="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-gray-900 hover:border-green-500 appearance-none focus:outline-none">
+                <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <title>Menu</title>
+                    <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block mt-2 lg:mt-0 bg-gray-100 md:bg-transparent z-20" id="nav-content">
+            <ul class="list-reset lg:flex justify-end flex-1 items-center">
+                <li class="mr-3">
+                    <a class="inline-block py-2 px-4 text-gray-900 font-bold no-underline" href="#">Active</a>
+                </li>
+                <li class="mr-3">
+                    <a class="inline-block text-gray-600 no-underline hover:text-gray-900 hover:text-underline py-2 px-4" href="#">link</a>
+                </li>
+                <li class="mr-3">
+                    <a class="inline-block text-gray-600 no-underline hover:text-gray-900 hover:text-underline py-2 px-4" href="#">link</a>
+                </li>
+            </ul>
+        </div>
+    </div>
 </nav>
-
-
-    <h1><h1>My Birthday Was Awesome</h1>
-<p> 03 Oct 2021 </p>
-
-<!-- This works easily cuz the relationship is  -->
-<p>
-  
-  
-</p>
-
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    <div class="container w-full md:max-w-3xl mx-auto pt-20">
+  <div class="w-full px-4 md:px-6 text-xl text-gray-800 leading-normal" style="font-family:Georgia,serif;">
+    <!--Title-->
+    <div class="font-sans">
+      <p class="text-base md:text-sm text-green-500 font-bold">&lt; <a href="#" class="text-base md:text-sm text-green-500 font-bold no-underline hover:underline">BACK TO BLOG</a></p>
+          <h1 class="font-bold font-sans break-normal text-gray-900 pt-6 pb-2 text-3xl md:text-4xl">My Birthday Was Awesome</h1>
+          <p class="text-sm md:text-base font-normal text-gray-600">Published 03 Oct 2021</p>
+    </div>
+    <!--Post Content-->
+    
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
 quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
 consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
 cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
-</h1> 
+  </div>
+
+  <!--Tags -->
+  <div class="text-base md:text-sm text-gray-500 px-4 py-6">
+    Tags: <a href="#" class="text-base md:text-sm text-green-500 no-underline hover:underline">Link</a> . <a href="#" class="text-base md:text-sm text-green-500 no-underline hover:underline">Link</a>
+  </div>
+
+  <!--/Author-->
+
+  <!--Divider-->
+  <!-- <hr class="border-b-2 border-gray-400 mb-8 mx-4"> -->
+
+  <!-- Paginations-->
+<!--   <div class="font-sans flex justify-between content-center px-4 pb-12">
+    <div class="text-left">
+      <span class="text-xs md:text-sm font-normal text-gray-600">&lt; Previous Post</span><br>
+      <p><a href="#" class="break-normal text-base md:text-sm text-green-500 font-bold no-underline hover:underline">Blog title</a></p>
+    </div>
+    <div class="text-right">
+      <span class="text-xs md:text-sm font-normal text-gray-600">Next Post &gt;</span><br>
+      <p><a href="#" class="break-normal text-base md:text-sm text-green-500 font-bold no-underline hover:underline">Blog title</a></p>
+    </div>
+  </div>  -->
+</div>
+<!--/container-->
+
+
+<script>
+  /* Progress bar */
+  //Source: https://alligator.io/js/progress-bar-javascript-css-variables/
+  var h = document.documentElement,
+    b = document.body,
+    st = 'scrollTop',
+    sh = 'scrollHeight',
+    progress = document.querySelector('#progress'),
+    scroll;
+  var scrollpos = window.scrollY;
+  var header = document.getElementById("header");
+  var navcontent = document.getElementById("nav-content");
+
+  document.addEventListener('scroll', function() {
+
+    /*Refresh scroll % width*/
+    scroll = (h[st] || b[st]) / ((h[sh] || b[sh]) - h.clientHeight) * 100;
+    progress.style.setProperty('--scroll', scroll + '%');
+
+    /*Apply classes for slide in bar*/
+    scrollpos = window.scrollY;
+
+    if (scrollpos > 10) {
+      header.classList.add("bg-white");
+      header.classList.add("shadow");
+      navcontent.classList.remove("bg-gray-100");
+      navcontent.classList.add("bg-white");
+    } else {
+      header.classList.remove("bg-white");
+      header.classList.remove("shadow");
+      navcontent.classList.remove("bg-white");
+      navcontent.classList.add("bg-gray-100");
+
+    }
+
+  });
+
+
+  //Javascript to toggle the menu
+  document.getElementById('nav-toggle').onclick = function() {
+    document.getElementById("nav-content").classList.toggle("hidden");
+  }
+</script>
+
+    <div class="container w-full md:max-w-3xl mx-auto pt-20">
+  <hr class="border-b-2 border-gray-400 mb-8 mx-4">
+
+  <div class="container">
+    <div class="font-sans bg-gradient-to-b from-green-100 to-gray-100 rounded-lg shadow-xl p-4 text-center">
+      <h2 class="font-bold break-normal text-xl md:text-3xl">Subscribe to my Newsletter</h2>
+      <h3 class="font-bold break-normal text-gray-600 text-sm md:text-base">Get the latest posts delivered right to your inbox</h3>
+      <div class="w-full text-center pt-4">
+        <form action="#">
+          <div class="max-w-xl mx-auto p-1 pr-0 flex flex-wrap items-center">
+            <input type="email" placeholder="youremail@example.com" class="flex-1 mt-4 appearance-none border border-gray-400 rounded shadow-md p-3 text-gray-600 mr-2 focus:outline-none">
+            <button type="submit" class="flex-1 mt-4 block md:inline-block appearance-none bg-green-500 text-white text-base font-semibold tracking-wider uppercase py-4 rounded shadow hover:bg-green-400">Subscribe</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+    <footer class="bg-white border-t border-gray-400 shadow mt-10">
+  <div class="container max-w-3xl mx-auto flex py-8">
+
+    <div class="w-full mx-auto flex flex-wrap justify-between">
+      <div class="flex">
+        <div class="flex w-full items-center font-sans px-4">
+          <img class="w-10 h-10 rounded-full mr-4" src="http://i.pravatar.cc/300" alt="Avatar of Author">
+          <div class="flex-1 px-2">
+            <p class="text-base font-bold text-base md:text-xl leading-none mb-2">Eduardo Poleo</p>
+            <p class="text-gray-600 text-xs md:text-base">Software Developer</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex">
+        <ul class="list-reset items-center text-sm pt-3 list-none">
+          <li class="inline">
+            <a class="inline-block text-gray-600 no-underline hover:text-gray-900 hover:text-underline py-1" href="#">
+              <svg width="45" height="45" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" fill="#12B981"><path d="M1152 896q0-106-75-181t-181-75-181 75-75 181 75 181 181 75 181-75 75-181zm138 0q0 164-115 279t-279 115-279-115-115-279 115-279 279-115 279 115 115 279zm108-410q0 38-27 65t-65 27-65-27-27-65 27-65 65-27 65 27 27 65zm-502-220q-7 0-76.5-.5t-105.5 0-96.5 3-103 10-71.5 18.5q-50 20-88 58t-58 88q-11 29-18.5 71.5t-10 103-3 96.5 0 105.5.5 76.5-.5 76.5 0 105.5 3 96.5 10 103 18.5 71.5q20 50 58 88t88 58q29 11 71.5 18.5t103 10 96.5 3 105.5 0 76.5-.5 76.5.5 105.5 0 96.5-3 103-10 71.5-18.5q50-20 88-58t58-88q11-29 18.5-71.5t10-103 3-96.5 0-105.5-.5-76.5.5-76.5 0-105.5-3-96.5-10-103-18.5-71.5q-20-50-58-88t-88-58q-29-11-71.5-18.5t-103-10-96.5-3-105.5 0-76.5.5zm768 630q0 229-5 317-10 208-124 322t-322 124q-88 5-317 5t-317-5q-208-10-322-124t-124-322q-5-88-5-317t5-317q10-208 124-322t322-124q88-5 317-5t317 5q208 10 322 124t124 322q5 88 5 317z"/></svg>
+            </a>
+          </li>
+          <li class="inline ml-5">
+            <a class="inline-block text-gray-600 no-underline hover:text-gray-900 hover:text-underline py-1" href="#">
+              <svg width="45" height="45" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" fill="#12B981"><path d="M1684 408q-67 98-162 167 1 14 1 42 0 130-38 259.5t-115.5 248.5-184.5 210.5-258 146-323 54.5q-271 0-496-145 35 4 78 4 225 0 401-138-105-2-188-64.5t-114-159.5q33 5 61 5 43 0 85-11-112-23-185.5-111.5t-73.5-205.5v-4q68 38 146 41-66-44-105-115t-39-154q0-88 44-163 121 149 294.5 238.5t371.5 99.5q-8-38-8-74 0-134 94.5-228.5t228.5-94.5q140 0 236 102 109-21 205-78-37 115-142 178 93-10 186-50z"/></svg>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
   </body>
 </html>
-<head>
-
-        
-  </style>
-
-</head>
